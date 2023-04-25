@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backnew"
     tools:context=".MainActivity">
 
     <Toolbar
@@ -12,25 +13,22 @@
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:elevation="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/bmenu"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginEnd="20dp"
             android:background="@android:color/transparent"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/bmenu" />
     </Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:src="@drawable/back"
-            android:scaleType="fitXY"
-            android:layout_height="wrap_content"/>
-
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/value_300">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"

@@ -1,36 +1,29 @@
 package com.assesment.testandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.assesment.testandroid.adapter.Adapter
 import com.assesment.testandroid.databinding.ActivityMainBinding
-import java.util.ArrayList
+import com.assesment.testandroid.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setData()
-    }
 
+        binding.recycler.layoutManager = LinearLayoutManager(this)
 
-    private fun setData() {
-        val list = arrayListOf<DataModel>()
-        list.apply {
-            add(DataModel("Order", R.drawable.order))
-            add(DataModel("How it works", R.drawable.work))
-            add(DataModel("About Us", R.drawable.about))
-            add(DataModel("Contact Us", R.drawable.contact))
-        }
-        setAdapter(list)
-    }
-
-    private fun setAdapter(list: ArrayList<DataModel>) {
-        binding.recycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = Adapter(context, list)
+        viewModel.getDataList().observe(this) {
+            val rAdapter = Adapter(applicationContext, it)
+            binding.recycler.adapter = rAdapter
         }
     }
 }
